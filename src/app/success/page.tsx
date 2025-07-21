@@ -19,7 +19,7 @@ const Home = () => {
   const [realmName, setRealmName] = useState("");
   const [characterName,  setCharacterName] = useState("");
   // will need to update this new endpoint for success service
-  const [partyData, setPartyData] = useState<any[]>([]); // Replace with actual data
+  const [partyData, setPartyData] = useState([]); // Replace with actual data
   const [isCalculating, setIsCalculating] = useState(false);
 
   //"https://successservice.onrender.com/api/success?targetLevel=10&name=Bedoof&realm=Azralon"

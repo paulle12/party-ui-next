@@ -1,7 +1,7 @@
 import React from 'react';
 import DiceRoll from '@/components/DiceRoll';
 
-const CalculateHeader = ({ handleCalculate, isCalculating, scoredParty, targetLevel }) => {
+const CalculateHeader = ({ handleCalculate, isCalculating }) => {
   return (
     <div>
       <div className='flex justify-center'>
