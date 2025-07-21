@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DiceRoll from '@/components/DiceRoll';
-import { calculatePartyScore, calculatePlayerScore } from '@/utils/partyScore';
 
 const CalculateHeader = ({ handleCalculate, isCalculating, scoredParty, targetLevel }) => {
   return (
@@ -23,7 +22,7 @@ const CalculateHeader = ({ handleCalculate, isCalculating, scoredParty, targetLe
               className="h-3/4 w-3/4 object-contain"
             />
           ) : (
-            `${((calculatePartyScore(scoredParty, targetLevel) / 50) * 100).toFixed(1)}%`
+            `0%`
           )}
         </div>
       </div>

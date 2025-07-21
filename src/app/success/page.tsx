@@ -1,26 +1,19 @@
 'use client';
 import ClassBox from '@/components/ClassBox';
 import DiceRoll from '@/components/DiceRoll';
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 
-type Props = {
-  name: string;
-  realm: string;
-  role: string;
-  className: string;
-}
+// type Member = {
+//   id: number;
+//   name: string;
+//   realm: string;
+//   active_spec_role: string;
+//   class: string;
+//   recentRuns: any[];
+//   active_spec_name: string;
+// }
 
-type Member = {
-  id: number;
-  name: string;
-  realm: string;
-  active_spec_role: string;
-  class: string;
-  recentRuns: any[];
-  active_spec_name: string;
-}
-
-type MemberWithScore = Member & { score: number; mythic_plus_scores_by_season: any[] };
+// type MemberWithScore = Member & { score: number; mythic_plus_scores_by_season: any[] };
 const Home = () => {
   const [targetLevel, setTargetLevel] = useState(10); // default +10
   const [realmName, setRealmName] = useState("");
