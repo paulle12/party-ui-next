@@ -3,15 +3,45 @@ import ClassBox from '@/components/ClassBox';
 import DiceRoll from '@/components/DiceRoll';
 import {useState } from 'react';
 
-// type Member = {
-//   id: number;
-//   name: string;
-//   realm: string;
-//   active_spec_role: string;
-//   class: string;
-//   recentRuns: any[];
-//   active_spec_name: string;
-// }
+type PartyResponse = {
+  partySuccessRate: number;
+  party: RaiderIOProfile[];
+};
+
+type RaiderIOProfile = {
+  name: string;
+  realm: string;
+  region: string;
+  characterClass: string;
+  role: string;
+  activeSpecRole: string;
+  isMainRole: boolean;
+  currentSeasonScore: number;
+  previousSeasonScore: number;
+  score: number;
+  mythic_plus_scores_by_season: {
+    season: string;
+    scores: {
+      all: number;
+      dps: number;
+    };
+  }[];
+  mythic_plus_recent_runs: {
+    dungeon: string;
+    short_name: string;
+    mythic_level: number;
+    completed_at: string;
+    num_keystone_upgrades: number;
+    score: number;
+    url: string;
+    time_ms: number;
+    affixes: {
+      id: number;
+      name: string;
+      description: string;
+    }[];
+  }[];
+};
 
 // type MemberWithScore = Member & { score: number; mythic_plus_scores_by_season: any[] };
 const Home = () => {
@@ -19,7 +49,7 @@ const Home = () => {
   const [realmName, setRealmName] = useState("");
   const [characterName,  setCharacterName] = useState("");
   // will need to update this new endpoint for success service
-  const [partyData, setPartyData] = useState([]); // Replace with actual data
+  const [partyData, setPartyData] = useState<PartyResponse | null>(null); // Replace with actual data
   const [isCalculating, setIsCalculating] = useState(false);
 
   //"https://successservice.onrender.com/api/success?targetLevel=10&name=Bedoof&realm=Azralon"
@@ -110,11 +140,11 @@ const fetchPartyWithHydration = async () => {
             </div>
           </div>
           <div>
-            {partyData?.party?.length > 0 ? partyData?.party.map((member) => {
+            {partyData?.party?.length ? partyData?.party.map((member) => {
               
               return (
                 <div
-                  key={`${member.id}.${member.name}`}
+                  key={`${member.name}`}
                   className="flex h-full items-stretch items-center rounded-lg px-4"
                 >
                   {/* Character info — takes ~2/3 */}
@@ -124,7 +154,7 @@ const fetchPartyWithHydration = async () => {
                     realm={member.realm}
                     className={member.characterClass}
                     role={member.role}
-                    activeSpec={member.active_spec_name}
+                    activeSpec={member.activeSpecRole}
                     isMainRole={member.isMainRole}
                     seasonalScore={member?.currentSeasonScore}
                     previousSeasonalScore={member?.previousSeasonScore}
